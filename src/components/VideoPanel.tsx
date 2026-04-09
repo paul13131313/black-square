@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { getVideoURL, getMediaType } from "@/lib/db";
+import { getVideoURL, getMediaTypeCached } from "@/lib/db";
 
 type Props = {
   id: string;
@@ -12,7 +12,7 @@ type Props = {
 
 export default function VideoPanel({ id, onDelete }: Props) {
   const [src, setSrc] = useState<string | null>(null);
-  const [type, setType] = useState<"video" | "image">("video");
+  const type = getMediaTypeCached(id);
 
   const {
     attributes,
@@ -25,11 +25,6 @@ export default function VideoPanel({ id, onDelete }: Props) {
 
   useEffect(() => {
     getVideoURL(id).then(setSrc);
-    getMediaType(id).then(setType);
-    return () => {
-      if (src) URL.revokeObjectURL(src);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const style = {
@@ -61,14 +56,14 @@ export default function VideoPanel({ id, onDelete }: Props) {
           muted
           loop
           playsInline
-          className="w-full h-full object-cover pointer-events-none"
+          className="w-full h-full object-cover pointer-events-none scale-[1.002]"
         />
       )}
       {src && type === "image" && (
         <img
           src={src}
           alt=""
-          className="w-full h-full object-cover pointer-events-none"
+          className="w-full h-full object-cover pointer-events-none scale-[1.002]"
         />
       )}
 

@@ -1,0 +1,11 @@
+name = "black-square-api"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "black-square-storage"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "19788c9095d14297a74a8298f6237d95"

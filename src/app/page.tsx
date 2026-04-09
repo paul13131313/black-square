@@ -73,7 +73,7 @@ export default function Home() {
         onDragEnd={handleDragEnd}
       >
         <SortableContext items={videoIds} strategy={rectSortingStrategy}>
-          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7">
+          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-0">
             {videoIds.map((id) => (
               <VideoPanel key={id} id={id} onDelete={handleDelete} />
             ))}
